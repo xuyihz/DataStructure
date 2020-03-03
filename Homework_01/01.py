@@ -1,10 +1,43 @@
 K = int(input())
 NumsStr = input().split()
-Nums = list(map(int, NumsStr)) # map
+Nums = list(map(int, NumsStr))  # map
 
 # algorithm 4. O(N)
+MaxSum = 0
+ThisSum = 0
+for i in range(K):
+    ThisSum += Nums[i]
+    if ThisSum > MaxSum:
+        MaxSum = ThisSum
+    elif ThisSum < 0:
+        ThisSum = 0
+print(MaxSum)
 
 # algorithm 3. O(NlogN)
+MaxSum = DivideAndConquer(Nums, 0, K-1)
+print(MaxSum)
+
+def DivideAndConquer(List, Left, Right):
+    if Left == Right:  # end of recursion
+        return max(List[Left], 0)
+
+    Center = (Left + Right) // 2  # floored quotient
+    MaxLeftSum = DivideAndConquer(List, Left, Center)
+    MaxRightSum = DivideAndConquer(List, Center, Right)
+
+    MaxLeftBorderSum = MaxBorderSum(List, Center, Left, -1)
+    MaxRightBorderSum = MaxBorderSum(List, Center, Right, 1)
+    
+    return max(MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum)
+
+def MaxBorderSum(List, Start, End, Step):
+    MaxSum = 0
+    ThisSum = 0
+    for i in range(Start, End. Step):
+        ThisSum += List[i]
+        if ThisSum > MaxSum:
+            MaxSum = ThisSum
+    return MaxSum
 
 # algorithm 2. O(N**2)
 MaxSum = 0
