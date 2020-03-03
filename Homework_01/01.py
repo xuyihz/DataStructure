@@ -14,8 +14,14 @@ for i in range(K):
 print(MaxSum)
 
 # algorithm 3. O(NlogN)
-MaxSum = DivideAndConquer(Nums, 0, K-1)
-print(MaxSum)
+def MaxBorderSum(List, Start, End, Step):
+    MaxSum = 0
+    ThisSum = 0
+    for i in range(Start, End, Step):
+        ThisSum += List[i]
+        if ThisSum > MaxSum:
+            MaxSum = ThisSum
+    return MaxSum
 
 def DivideAndConquer(List, Left, Right):
     if Left == Right:  # end of recursion
@@ -23,21 +29,15 @@ def DivideAndConquer(List, Left, Right):
 
     Center = (Left + Right) // 2  # floored quotient
     MaxLeftSum = DivideAndConquer(List, Left, Center)
-    MaxRightSum = DivideAndConquer(List, Center, Right)
+    MaxRightSum = DivideAndConquer(List, Center+1, Right)
 
     MaxLeftBorderSum = MaxBorderSum(List, Center, Left, -1)
-    MaxRightBorderSum = MaxBorderSum(List, Center, Right, 1)
+    MaxRightBorderSum = MaxBorderSum(List, Center+1, Right, 1)
     
     return max(MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum)
 
-def MaxBorderSum(List, Start, End, Step):
-    MaxSum = 0
-    ThisSum = 0
-    for i in range(Start, End. Step):
-        ThisSum += List[i]
-        if ThisSum > MaxSum:
-            MaxSum = ThisSum
-    return MaxSum
+MaxSum = DivideAndConquer(Nums, 0, K-1)
+print(MaxSum)
 
 # algorithm 2. O(N**2)
 MaxSum = 0

@@ -6,7 +6,7 @@ Nums = list(map(int, NumsStr))  # map
 def MaxBorderSum(List, Start, End, Step):
     MaxSum = 0
     ThisSum = 0
-    for i in range(Start, End. Step):
+    for i in range(Start, End, Step):
         ThisSum += List[i]
         if ThisSum > MaxSum:
             MaxSum = ThisSum
@@ -18,10 +18,10 @@ def DivideAndConquer(List, Left, Right):
 
     Center = (Left + Right) // 2  # floored quotient
     MaxLeftSum = DivideAndConquer(List, Left, Center)
-    MaxRightSum = DivideAndConquer(List, Center, Right)
+    MaxRightSum = DivideAndConquer(List, Center+1, Right)
 
     MaxLeftBorderSum = MaxBorderSum(List, Center, Left, -1)
-    MaxRightBorderSum = MaxBorderSum(List, Center, Right, 1)
+    MaxRightBorderSum = MaxBorderSum(List, Center+1, Right, 1)
     
     return max(MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum)
 
