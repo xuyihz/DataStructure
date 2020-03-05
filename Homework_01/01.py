@@ -17,7 +17,7 @@ print(MaxSum)
 def MaxBorderSum(List, Start, End, Step):
     MaxSum = 0
     ThisSum = 0
-    for i in range(Start, End, Step):
+    for i in range(Start, End+Step, Step):
         ThisSum += List[i]
         if ThisSum > MaxSum:
             MaxSum = ThisSum
